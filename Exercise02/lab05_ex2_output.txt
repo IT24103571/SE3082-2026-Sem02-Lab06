@@ -1,0 +1,27 @@
+thread # 0
+Inside Single # 0
+Exiting Single 
+thread # 1
+Hi again from thread # 0
+Hi again from thread # 1
+
+
+
+#pragma omp single is used to make sure that only one thread executes the code inside the single block.
+
+In this program, all threads first print their thread number. When they reach:
+
+#pragma omp single
+
+only one of the threads executes:
+
+printf("Inside Single # %d\n", omp_get_thread_num());
+printf("Exiting Single \n");
+
+The other threads skip this block and continue to:
+
+printf("Hi again from thread # %d\n", omp_get_thread_num());
+
+The thread that executes the single block is not fixed; it can be different each time the program runs.
+
+In short: single ensures that a particular block of code is executed only once by one thread, rather than by every thread.
