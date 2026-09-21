@@ -1,0 +1,13 @@
+thread # 0
+thread # 1
+Outside Barrier # 0
+Hi again from thread # 0
+Outside Barrier # 1
+Hi again from thread # 1
+
+
+#pragma omp barrier is used to synchronize all the OpenMP threads.
+
+In this program, each thread first prints its thread number. When a thread reaches the barrier, it waits until all other threads have also reached the barrier. Only after all threads reach the barrier can they continue executing the statements after it.
+
+Therefore, the messages “Outside Barrier” and “Hi again” are printed only after all threads have reached the barrier. The order in which the threads print these messages may vary because the threads execute concurrently.
