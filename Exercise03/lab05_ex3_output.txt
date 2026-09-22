@@ -1,0 +1,33 @@
+thread # 0
+Inside Master # 0
+Exiting Master 
+Hi again from thread # 0
+thread # 1
+Hi again from thread # 1
+
+
+
+#pragma omp master means only Thread 0 (the master thread) executes the code inside the master block.
+
+In this program:
+
+#pragma omp master
+{
+    printf("Inside Master # %d\n", omp_get_thread_num());
+    printf("Exiting Master \n");
+}
+
+If there are 2 threads:
+
+Thread 0 → executes the master block ✅
+Thread 1 → skips the master block ❌
+
+After that, both threads continue executing:
+
+printf("Hi again from thread # %d\n", omp_get_thread_num());
+Simple difference
+parallel → all threads
+single → one thread (any thread)
+master → Thread 0 only
+
+Also, master has no automatic barrier, so other threads do not have to wait for Thread 0 to finish the master block.
