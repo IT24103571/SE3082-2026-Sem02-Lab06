@@ -1,0 +1,18 @@
+C[0] = 0.00
+C[999999] = 1999998.00
+Time = 0.004094 seconds
+
+
+The program parallelizes the element-wise multiplication of two arrays using OpenMP and strip mining.
+
+The arrays A, B, and C contain 1,000,000 elements.
+The required operation is:
+C[i] = A[i] * B[i];
+Strip mining is used to divide the arrays into fixed-size strips of 8 elements.
+#pragma omp parallel for distributes the strips among multiple threads, allowing them to be processed in parallel.
+A strip size of 8 is used because a 256-bit SIMD vector can hold 8 float values, since each float is 32 bits:
+256 / 32 = 8
+
+Therefore, each strip contains 8 elements, matching the SIMD vector width and allowing efficient vector processing.
+
+Result: The element-wise multiplication is performed in parallel across multiple threads while the data is divided into SIMD-friendly strips.
