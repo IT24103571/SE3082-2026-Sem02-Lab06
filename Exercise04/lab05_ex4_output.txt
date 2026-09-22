@@ -1,0 +1,132 @@
+r = 4, k = 1, thread # = 1
+r = 4, k = 2, thread # = 1
+r = 4, k = 3, thread # = 1
+r = 4, k = 4, thread # = 1
+r = 4, k = 5, thread # = 1
+r = 4, k = 6, thread # = 1
+r = 4, k = 7, thread # = 1
+r = 4, k = 8, thread # = 1
+r = 4, k = 9, thread # = 1
+r = 4, k = 10, thread # = 1
+r = 5, k = 1, thread # = 1
+r = 5, k = 2, thread # = 1
+r = 5, k = 3, thread # = 1
+r = 5, k = 4, thread # = 1
+r = 5, k = 5, thread # = 1
+r = 5, k = 6, thread # = 1
+r = 5, k = 7, thread # = 1
+r = 5, k = 8, thread # = 1
+r = 5, k = 9, thread # = 1
+r = 5, k = 10, thread # = 1
+r = 1, k = 1, thread # = 0
+r = 1, k = 2, thread # = 0
+r = 1, k = 3, thread # = 0
+r = 1, k = 4, thread # = 0
+r = 1, k = 5, thread # = 0
+r = 1, k = 6, thread # = 0
+r = 1, k = 7, thread # = 0
+r = 1, k = 8, thread # = 0
+r = 1, k = 9, thread # = 0
+r = 1, k = 10, thread # = 0
+r = 2, k = 1, thread # = 0
+r = 2, k = 2, thread # = 0
+r = 2, k = 3, thread # = 0
+r = 2, k = 4, thread # = 0
+r = 2, k = 5, thread # = 0
+r = 2, k = 6, thread # = 0
+r = 2, k = 7, thread # = 0
+r = 2, k = 8, thread # = 0
+r = 2, k = 9, thread # = 0
+r = 2, k = 10, thread # = 0
+r = 3, k = 1, thread # = 0
+r = 3, k = 2, thread # = 0
+r = 3, k = 3, thread # = 0
+r = 3, k = 4, thread # = 0
+r = 3, k = 5, thread # = 0
+r = 3, k = 6, thread # = 0
+r = 3, k = 7, thread # = 0
+r = 3, k = 8, thread # = 0
+r = 3, k = 9, thread # = 0
+r = 3, k = 10, thread # = 0
+
+
+
+collapse(2)
+r = 1, k = 1, thread # = 0
+r = 1, k = 2, thread # = 0
+r = 1, k = 3, thread # = 0
+r = 1, k = 4, thread # = 0
+r = 1, k = 5, thread # = 0
+r = 1, k = 6, thread # = 0
+r = 1, k = 7, thread # = 0
+r = 1, k = 8, thread # = 0
+r = 1, k = 9, thread # = 0
+r = 1, k = 10, thread # = 0
+r = 2, k = 1, thread # = 0
+r = 2, k = 2, thread # = 0
+r = 2, k = 3, thread # = 0
+r = 2, k = 4, thread # = 0
+r = 2, k = 5, thread # = 0
+r = 2, k = 6, thread # = 0
+r = 2, k = 7, thread # = 0
+r = 2, k = 8, thread # = 0
+r = 2, k = 9, thread # = 0
+r = 2, k = 10, thread # = 0
+r = 3, k = 1, thread # = 0
+r = 3, k = 2, thread # = 0
+r = 3, k = 3, thread # = 0
+r = 3, k = 4, thread # = 0
+r = 3, k = 5, thread # = 1
+r = 3, k = 6, thread # = 1
+r = 3, k = 7, thread # = 1
+r = 3, k = 8, thread # = 1
+r = 3, k = 9, thread # = 1
+r = 3, k = 10, thread # = 1
+r = 4, k = 1, thread # = 1
+r = 4, k = 2, thread # = 1
+r = 4, k = 3, thread # = 1
+r = 4, k = 4, thread # = 1
+r = 4, k = 5, thread # = 1
+r = 4, k = 6, thread # = 1
+r = 4, k = 7, thread # = 1
+r = 4, k = 8, thread # = 1
+r = 4, k = 9, thread # = 1
+r = 4, k = 10, thread # = 1
+r = 5, k = 1, thread # = 1
+r = 5, k = 2, thread # = 1
+r = 5, k = 3, thread # = 1
+r = 5, k = 4, thread # = 1
+r = 5, k = 5, thread # = 1
+r = 5, k = 6, thread # = 1
+r = 5, k = 7, thread # = 1
+r = 5, k = 8, thread # = 1
+r = 5, k = 9, thread # = 1
+r = 5, k = 10, thread # = 1
+
+
+Exercise 4 – Explanation
+
+With:
+
+#pragma omp parallel for collapse(2)
+
+OpenMP combines the two nested loops (r and k) into one large loop.
+
+Here:
+
+r has 5 values → 1 to 5
+k has 10 values → 1 to 10
+Total = 5 × 10 = 50 iterations
+
+These 50 iterations are then divided among the available threads.
+
+For example, with 2 threads:
+
+Thread 0 → some of the 50 iterations
+Thread 1 → the remaining iterations
+
+So unlike the normal parallel for, where only the outer r loop is divided, collapse(2) allows OpenMP to distribute the combined r and k iterations.
+
+In simple terms:
+
+collapse(2) combines two nested loops and distributes their combined iterations among the threads, allowing better parallelization of nested loops.
