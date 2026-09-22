@@ -1,0 +1,15 @@
+1 Thread
+Area of Mandlebrot set =   1.50928453 +/-   0.00075464
+Time = 22.317395 seconds
+
+2 Threads
+Area of Mandlebrot set =   4.10446266 +/-   0.00205223
+Time = 20.291929 seconds
+
+3 Threads
+Area of Mandlebrot set =   4.64036484 +/-   0.00232018
+Time = 13.202774 seconds
+
+4 Threads
+Area of Mandlebrot set =   4.14450703 +/-   0.00207225
+Time = 17.141189 seconds
