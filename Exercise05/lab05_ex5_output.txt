@@ -1,0 +1,53 @@
+Fibonacci(10) = 55
+
+
+The original Fibonacci function is recursive:
+
+i = fib(n - 1);
+j = fib(n - 2);
+
+Normally, these two calculations happen one after another.
+
+We use OpenMP tasks to allow them to run in parallel:
+
+#pragma omp task shared(i)
+i = fib(n - 1);
+
+#pragma omp task shared(j)
+j = fib(n - 2);
+
+This creates two separate tasks:
+
+             fib(n)
+             /    \
+       Task 1     Task 2
+       fib(n-1)   fib(n-2)
+
+Different threads can work on these tasks.
+
+Then:
+
+#pragma omp taskwait
+
+makes the program wait until both tasks are completed before doing:
+
+return i + j;
+Why single is used
+#pragma omp single
+{
+    result = fib(n);
+}
+
+Only one thread starts the Fibonacci calculation. From there, the tasks can be distributed among the available threads.
+
+In simple words
+
+task = create work that can be done by different threads.
+taskwait = wait until the tasks are finished.
+single = only one thread starts the recursive calculation.
+
+Your output:
+
+Fibonacci(10) = 55
+
+shows that the parallelized program produced the correct Fibonacci result
